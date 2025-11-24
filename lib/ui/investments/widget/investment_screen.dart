@@ -8,6 +8,9 @@ class InvestmentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DynamicAppBar(title: 'Investment'),
+      body: Center(
+        child: Text('Investment')
+      )
     );
   }
 }

@@ -8,6 +8,9 @@ class UtilitiesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DynamicAppBar(title: 'Utilities'),
+      body: Center(
+        child: Text('Utilities')
+      )
     );
   }
 }

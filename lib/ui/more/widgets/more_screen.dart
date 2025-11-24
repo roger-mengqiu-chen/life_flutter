@@ -11,6 +11,9 @@ class MoreScreen extends StatelessWidget {
         title: 'More',
         showFilter: false,
         showTools: false,
+      ),
+      body: Center(
+        child: Text('More')
       )
     );
   }
