@@ -52,25 +52,4 @@ class DynamicAppBar extends StatelessWidget implements PreferredSizeWidget {
       ]: []
     );
   }
-
-  void _showMessageBox(BuildContext context, String message) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          title: const Text('Action Triggered'),
-          content: Text(message),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Close', style: TextStyle(color: Colors.indigo)),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
