@@ -1,0 +1,10 @@
+import 'package:flutter/cupertino.dart';
+
+class UtilitiesScreen extends StatelessWidget {
+  const UtilitiesScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
