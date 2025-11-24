@@ -18,6 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return const TransactionScreen();
       case 1:
+        return const
+      case 1:
         return const InvestmentScreen();
       case 2:
         return const UtilitiesScreen();

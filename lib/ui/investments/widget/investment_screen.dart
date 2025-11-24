@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class InvestmentScreen extends StatelessWidget {
   const InvestmentScreen({super.key});
