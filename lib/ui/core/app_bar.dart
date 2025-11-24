@@ -22,7 +22,7 @@ class DynamicAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: const Icon(Icons.filter_alt_outlined, color: Colors.white),
         tooltip: 'Filter',
         onPressed: () {
-          _showMessageBox(context, 'Left menu opened');
+          Scaffold.of(context).openDrawer();
         },
       ) : null,
       title: Text(
@@ -45,7 +45,7 @@ class DynamicAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.handyman_outlined, color: Colors.white),
           tooltip: 'Tools',
           onPressed: () {
-            _showMessageBox(context, 'Toolbox opened');
+            Scaffold.of(context).openEndDrawer();
           }
         ),
         const SizedBox(width: 8)
