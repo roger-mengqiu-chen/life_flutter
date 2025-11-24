@@ -7,7 +7,7 @@ class TransactionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DynamicAppBar()
+      appBar: const DynamicAppBar(title: 'Transaction',)
     );
   }
 }
