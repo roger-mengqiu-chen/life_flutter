@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_flutter/ui/investments/widget/investment_screen.dart';
+import 'package:life_flutter/ui/more/widgets/more_screen.dart';
 import 'package:life_flutter/ui/transactions/widgets/transaction_screen.dart';
 import 'package:life_flutter/ui/utilities/widgets/utilities_screen.dart';
 
@@ -18,11 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return const TransactionScreen();
       case 1:
-        return const
-      case 1:
         return const InvestmentScreen();
       case 2:
         return const UtilitiesScreen();
+      case 3:
+        return const MoreScreen();
       default:
         return const TransactionScreen();
     }
@@ -44,20 +45,25 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.swap_horiz_outlined),
+            activeIcon: Icon(Icons.swap_horiz),
+            label: 'Transactions',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.monetization_on_outlined),
             activeIcon: Icon(Icons.monetization_on),
-            label: 'Investment'
+            label: 'Investments'
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.gas_meter_outlined),
             activeIcon: Icon(Icons.gas_meter),
             label: 'Utilities'
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.more_horiz_outlined),
+            activeIcon: Icon(Icons.more_horiz),
+            label: 'More'
+          )
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
