@@ -14,4 +14,9 @@ class Location {
   String? city;
   String? province;
   String? country;
+
+  @override
+  String toString() {
+    return name;
+  }
 }

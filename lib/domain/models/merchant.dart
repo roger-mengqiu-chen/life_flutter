@@ -5,4 +5,9 @@ class Merchant {
 
   String name;
   Location? location;
+
+  @override
+  String toString() {
+    return name;
+  }
 }
