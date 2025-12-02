@@ -7,7 +7,7 @@ class MoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DynamicAppBar(
+      appBar: const DynamicAppBar(
         title: 'More',
         showFilter: false,
         showTools: false,

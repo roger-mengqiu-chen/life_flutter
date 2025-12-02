@@ -7,7 +7,7 @@ class InvestmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DynamicAppBar(title: 'Investment'),
+      appBar: const DynamicAppBar(title: 'Investment'),
       body: Center(
         child: Text('Investment')
       )

@@ -9,7 +9,7 @@ class TransactionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const DynamicAppBar(title: 'Transaction'),
-      drawer: DynamicDrawer(
+      drawer: const DynamicDrawer(
         title: 'Filters',
         items: [
           ListTile(
@@ -22,7 +22,7 @@ class TransactionScreen extends StatelessWidget {
           )
         ]
       ),
-      endDrawer: DynamicDrawer(
+      endDrawer: const DynamicDrawer(
         title: 'Tools',
         items: [
           ListTile(

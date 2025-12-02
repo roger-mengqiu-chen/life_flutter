@@ -1,6 +1,7 @@
 class Location {
   Location({
     required this.name,
+    this.id,
     this.streetNo,
     this.streetName,
     this.city,
@@ -9,6 +10,7 @@ class Location {
   });
 
   String name;
+  int? id;
   String? streetNo;
   String? streetName;
   String? city;

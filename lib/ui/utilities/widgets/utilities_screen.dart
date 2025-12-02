@@ -6,7 +6,7 @@ class UtilitiesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: DynamicAppBar(title: 'Utilities'),
       body: Center(
         child: Text('Utilities')

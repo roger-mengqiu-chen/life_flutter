@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:life_flutter/data/services/db.dart';
 import 'package:life_flutter/ui/home/widgets/home_screen.dart';
 
-void main() {
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  DB db = DB.instance;
+  await db.database;
   runApp(const MainApp());
 }
 
