@@ -5,8 +5,7 @@ import 'package:life_flutter/ui/home/widgets/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  DB db = DB.instance;
-  await db.database;
+  await DB.instance.database;
   runApp(const MainApp());
 }
 
