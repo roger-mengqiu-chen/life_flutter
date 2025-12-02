@@ -7,6 +7,7 @@ enum TransactionType {
 
 class Transaction {
   Transaction({
+    this.id,
     required this.transactionTime,
     required this.amount,
     required this.merchant,
@@ -14,6 +15,7 @@ class Transaction {
     required this.category
   });
 
+  int? id;
   DateTime transactionTime;
   double amount = 0.0;
   Merchant merchant;
