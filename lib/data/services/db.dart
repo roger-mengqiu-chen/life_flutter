@@ -35,4 +35,10 @@ class DB {
     }
     return await openDatabase(path);
   }
+
+  Future execute() async {
+    if (_db == null) return;
+    final res = await _db!.rawQuery('SELECT * FROM category');
+    return res;
+  }
 }

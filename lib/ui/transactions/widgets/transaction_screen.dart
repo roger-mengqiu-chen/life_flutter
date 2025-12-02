@@ -38,7 +38,11 @@ class TransactionScreen extends StatelessWidget {
               title: Text('Bulk Edit')
           )
         ]
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add)
+      ),
     );
   }
 }
