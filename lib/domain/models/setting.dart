@@ -1,4 +1,5 @@
-class Settings {
+class Setting {
+  int? id;
   late String name;
   late String value;
 
