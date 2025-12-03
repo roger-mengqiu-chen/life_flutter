@@ -40,4 +40,9 @@ class DB {
     final res = await _db!.rawQuery('SELECT * FROM category');
     return res;
   }
+
+  Future query(String query) async {
+    if (_db == null) return;
+    return await _db!.rawQuery(query);
+  }
 }
