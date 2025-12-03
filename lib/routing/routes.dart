@@ -1,5 +1,6 @@
 abstract final class Routes {
   static const home = '/';
+  static const auth = '/auth';
   static const transactions = '/transactions';
   static String transactionWithId(int id) => '/transactions/$id';
   static const investments = '/investments';
