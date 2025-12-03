@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:life_flutter/ui/categories/widgets/category_screen.dart';
 import 'package:life_flutter/ui/core/app_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:life_flutter/ui/categories/viewmodels/category_viewmodel.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -12,25 +15,30 @@ class MoreScreen extends StatelessWidget {
         showFilter: false,
         showTools: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 30.0,
-          mainAxisSpacing: 30.0,
-          children: <Widget>[
-            _buildGridTile(Icons.category, 'Categories'),
-            _buildGridTile(Icons.shopping_bag, 'Merchants'),
-            _buildGridTile(Icons.calendar_month, 'Events'),
-            _buildGridTile(Icons.location_on, 'Locations'),
-            _buildGridTile(Icons.people, 'People')
-          ]
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            crossAxisSpacing: 30.0,
+            mainAxisSpacing: 30.0,
+            children: <Widget>[
+              _buildGridTile(context, Icons.category, 'Categories', () => _categoryOnTap(context)),
+              _buildGridTile(context, Icons.shopping_bag, 'Merchants', () {}),
+              _buildGridTile(context, Icons.calendar_month, 'Events', () {}),
+              _buildGridTile(context, Icons.location_on, 'Locations', () {}),
+              _buildGridTile(context, Icons.people, 'People', () {}),
+              _buildGridTile(context, Icons.settings, 'Settings', () {}),
+            ]
+          )
         )
       )
     );
   }
   
-  Widget _buildGridTile(IconData icon, String label) {
+  Widget _buildGridTile(BuildContext context, IconData icon, String label, VoidCallback onTap) {
     return Container (
       decoration: BoxDecoration(
         color: Colors.white,
@@ -45,8 +53,7 @@ class MoreScreen extends StatelessWidget {
         ]
       ),
       child: InkWell(
-        onTap: () {
-        },
+        onTap: onTap,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +76,17 @@ class MoreScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _categoryOnTap(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CategoryScreen(
+          viewmodel: CategoryViewmodel(categoryRepository: context.read())
+        )
+      )
     );
   }
 }
