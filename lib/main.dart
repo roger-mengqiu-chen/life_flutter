@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_flutter/data/services/db.dart';
-import 'package:life_flutter/ui/home/widgets/home_screen.dart';
+import 'package:life_flutter/routing/router.dart';
 import 'package:life_flutter/config/dependencies.dart';
 import 'package:provider/provider.dart';
 
@@ -16,12 +16,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Life',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.indigo),
       ),
-      home: const HomeScreen(),
+      routerConfig: router(context.read()),
     );
   }
 }
