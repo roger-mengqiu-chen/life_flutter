@@ -6,5 +6,14 @@ class AuthViewmodel {
 
   final AuthRepository _authRepository;
 
+  bool authenticated = false;
 
+  Future<bool> biometricAuthenticate() async {
+    bool biometricsEnabled = await _authRepository.biometricsAuthEnabled;
+    if (!biometricsEnabled) return true;
+
+    bool res = await _authRepository.biometricsAuthenticate();
+    authenticated = res;
+    return res;
+  }
 }

@@ -35,7 +35,8 @@ class DB {
     return await openDatabase(path);
   }
 
-  Future query(String query) async {
-    return await _db!.rawQuery(query);
+  Future<List<Map<String, dynamic>>> query(String query) async {
+    final result = await _db!.rawQuery(query);
+    return result;
   }
 }
