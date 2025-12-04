@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:life_flutter/ui/categories/widgets/category_screen.dart';
+import 'package:go_router/go_router.dart';
+import 'package:life_flutter/routing/routes.dart';
 import 'package:life_flutter/ui/core/app_bar.dart';
-import 'package:provider/provider.dart';
-import 'package:life_flutter/ui/categories/viewmodels/category_viewmodel.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -30,7 +29,7 @@ class MoreScreen extends StatelessWidget {
               _buildGridTile(context, Icons.calendar_month, 'Events', () {}),
               _buildGridTile(context, Icons.location_on, 'Locations', () {}),
               _buildGridTile(context, Icons.people, 'People', () {}),
-              _buildGridTile(context, Icons.settings, 'Settings', () {}),
+              _buildGridTile(context, Icons.settings, 'Settings', () => _settingsOnTap(context)),
             ]
           )
         )
@@ -80,13 +79,10 @@ class MoreScreen extends StatelessWidget {
   }
 
   void _categoryOnTap(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CategoryScreen(
-          viewmodel: CategoryViewmodel(categoryRepository: context.read())
-        )
-      )
-    );
+    context.push(Routes.categories);
+  }
+  
+  void _settingsOnTap(BuildContext context) {
+    context.push(Routes.settings);
   }
 }
