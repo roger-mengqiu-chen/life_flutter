@@ -41,7 +41,7 @@ class MoreScreen extends StatelessWidget {
   Widget _buildGridTile(BuildContext context, IconData icon, String label, VoidCallback onTap) {
     return Container (
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
