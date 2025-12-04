@@ -21,7 +21,7 @@ class AuthRepository extends ChangeNotifier{
   Future<bool> get biometricsAuthEnabled async {
     bool hasBiometrics = await _biometricService.hasBiometrics();
     final result = await _db.query(
-      'SELECT value FROM settings WHERE name = \'biometricsEnabled\''
+      'SELECT value FROM settings WHERE name = \'biometrics enabled\''
     );
     bool biometricsEnabled = result.isNotEmpty && result[0]['value'] == '1';
     return hasBiometrics && biometricsEnabled;
