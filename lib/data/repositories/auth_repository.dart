@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_flutter/data/services/auth.dart';
-
-import '../services/db.dart';
+import 'package:life_flutter/data/services/db.dart';
 
 class AuthRepository extends ChangeNotifier{
   AuthRepository({required DB db}) : _db = db;
@@ -15,10 +14,14 @@ class AuthRepository extends ChangeNotifier{
   }
 
   Future<bool> get isBiometricsAuthEnabled async {
-    final result = await _db.query('SELECT value FROM settings WHERE name = \'biometricsEnabled\'');
+    final List<Map<String, String>> result = await _db.query(
+      'SELECT value FROM settings WHERE name = \'biometricsEnabled\''
+    );
+    bool biometricsEnabled = result.isNotEmpty && result[0]['value'] == '1';
+    return biometricsEnabled;
   }
 
-  Future<bool> get isAuthenticated async{
+  Future<bool> get isAuthenticated async {
     if (!_isAuthenticated) {
       return await biometricsAuthenticate();
     }

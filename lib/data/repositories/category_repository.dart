@@ -6,7 +6,9 @@ class CategoryRepository {
   final DB _db;
 
   Future<List<Category>> get categories async {
-    List<Map<String, dynamic>> res = await _db.execute();
+    List<Map<String, dynamic>> res = await _db.query(
+      'SELECT * FROM category'
+    );
     return res.map((e) => Category(id: e['id'], name: e['name'])).toList();
   }
 }

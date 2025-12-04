@@ -9,7 +9,7 @@ List<SingleChildWidget> get providers {
     Provider(create: (context) => DB.instance),
     Provider(create: (context) => CategoryRepository(db: context.read<DB>())),
     ChangeNotifierProvider(
-      create: (context) => AuthRepository()
+      create: (context) => AuthRepository(db: context.read())
     )
   ];
 }
