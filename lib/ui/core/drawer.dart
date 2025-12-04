@@ -19,15 +19,15 @@ class DynamicDrawer extends StatelessWidget {
               SizedBox(
                 height: 100.0,
                 child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.indigo,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary
                   ),
                   alignment: Alignment.center,
                   padding: const EdgeInsets.only(left: 16.0, top: 40),
                   child: Text(
                     title,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       fontSize: 20,
                     ),
                   ),
