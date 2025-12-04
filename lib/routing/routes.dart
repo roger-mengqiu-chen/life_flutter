@@ -8,5 +8,6 @@ abstract final class Routes {
   static String utilitiesWithId(int id) => '/utilities/$id';
   static const categories = '/categories';
   static String categoryWithId(int id) => '/categories/$id';
+  static String settings = '/settings';
   static const report = '/reports';
 }

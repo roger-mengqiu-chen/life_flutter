@@ -3,7 +3,11 @@ import 'package:life_flutter/data/repositories/auth_repository.dart';
 import 'package:life_flutter/routing/routes.dart';
 import 'package:life_flutter/ui/auth/viewmodels/auth_viewmodel.dart';
 import 'package:life_flutter/ui/auth/widgets/auth_screen.dart';
+import 'package:life_flutter/ui/categories/viewmodels/category_viewmodel.dart';
+import 'package:life_flutter/ui/categories/widgets/category_screen.dart';
 import 'package:life_flutter/ui/home/widgets/home_screen.dart';
+import 'package:life_flutter/ui/setting/viewmodels/setting_viewmodel.dart';
+import 'package:life_flutter/ui/setting/widgets/setting_screen.dart';
 import 'package:provider/provider.dart';
 
 GoRouter router(AuthRepository authRepository) => GoRouter(
@@ -25,6 +29,24 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
       name: 'home',
       builder: (context, state) {
         return HomeScreen();
+      }
+    ),
+    GoRoute(
+      path: Routes.categories,
+      name: 'categories',
+      builder: (context, state) {
+        return CategoryScreen(
+          viewmodel: CategoryViewmodel(categoryRepository: context.read())
+        );
+      }
+    ),
+    GoRoute(
+      path: Routes.settings,
+      name: 'settings',
+      builder: (context, state) {
+        return SettingScreen(
+          viewmodel: SettingViewmodel(settingRepository: context.read())
+        );
       }
     )
   ]
