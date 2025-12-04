@@ -39,4 +39,8 @@ class DB {
     final result = await _db!.rawQuery(query);
     return result;
   }
+
+  Future<void> update(String query, List<dynamic> args) async {
+    await _db!.rawUpdate(query, args);
+  }
 }
