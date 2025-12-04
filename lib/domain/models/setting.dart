@@ -1,4 +1,10 @@
 class Setting {
+  Setting({
+    this.id,
+    required this.name,
+    required this.value
+  });
+
   int? id;
   late String name;
   late String value;
