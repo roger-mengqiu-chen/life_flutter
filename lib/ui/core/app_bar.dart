@@ -17,9 +17,12 @@ class DynamicAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   AppBar build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final foregroundColor = colorScheme.onPrimary;
+
     return AppBar (
       leading: showFilter ? IconButton(
-        icon: const Icon(Icons.filter_alt_outlined, color: Colors.white),
+        icon: Icon(Icons.filter_alt_outlined, color: foregroundColor),
         tooltip: 'Filter',
         onPressed: () {
           Scaffold.of(context).openDrawer();
@@ -30,19 +33,19 @@ class DynamicAppBar extends StatelessWidget implements PreferredSizeWidget {
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20,
-          color:Colors.white,
+          color: foregroundColor,
           letterSpacing: -0.5
         ),
         overflow: TextOverflow.ellipsis,
       ),
       centerTitle: true,
 
-      backgroundColor: Colors.indigo[600],
+      backgroundColor: colorScheme.primary,
       elevation: 4.0,
 
       actions: showTools ? [
         IconButton(
-          icon: const Icon(Icons.handyman_outlined, color: Colors.white),
+          icon: Icon(Icons.handyman_outlined, color: foregroundColor),
           tooltip: 'Tools',
           onPressed: () {
             Scaffold.of(context).openEndDrawer();

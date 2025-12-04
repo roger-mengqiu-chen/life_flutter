@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Life',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.indigo),
+        colorScheme: .fromSeed(seedColor: Color(0xFF2A7937)),
       ),
       routerConfig: router(context.read()),
     );
