@@ -16,7 +16,6 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   final LocalAuthentication auth = LocalAuthentication();
-  bool _isAuthenticating = false;
   String _authStatus = '';
 
   @override
@@ -28,14 +27,9 @@ class _AuthScreenState extends State<AuthScreen> {
   Future<void> _authenticate() async {
     bool authenticated = false;
 
-    setState(() {
-      _isAuthenticating = true;
-    });
-
     authenticated = await widget.viewmodel.biometricAuthenticate();
 
     setState(() {
-      _isAuthenticating = false;
       if (authenticated) {
         _authStatus = 'Authentication Successful! Welcome!';
         context.go(Routes.home);
