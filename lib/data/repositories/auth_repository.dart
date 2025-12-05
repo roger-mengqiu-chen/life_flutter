@@ -14,9 +14,9 @@ class AuthRepository extends ChangeNotifier{
   bool authenticated = false;
 
   Future<bool> biometricsAuthenticate() async {
-    bool result = await _biometricService.authenticate();
+    authenticated= await _biometricService.authenticate();
     notifyListeners();
-    return result;
+    return authenticated;
   }
 
   Future<bool> get biometricsAuthEnabled async {
