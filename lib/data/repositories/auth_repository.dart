@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:life_flutter/data/services/auth.dart';
 import 'package:life_flutter/data/services/db.dart';
 
