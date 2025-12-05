@@ -3,8 +3,8 @@ class Setting {
     this.id,
     required this.name,
     required this.value,
-    required this.canToggle
-  });
+    required int toggleAttr
+  }) : canToggle = toggleAttr == 1;
 
   int? id;
   late String name;

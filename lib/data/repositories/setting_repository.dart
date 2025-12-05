@@ -14,7 +14,8 @@ class SettingRepository {
         Setting(
           id: e['id'],
           name: e['name'],
-          value: e['value']
+          value: e['value'],
+          toggleAttr: e['canToggle']
     )).toList();
   }
 
