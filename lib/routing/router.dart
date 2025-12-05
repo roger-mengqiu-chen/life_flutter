@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:life_flutter/data/repositories/auth_repository.dart';
 import 'package:life_flutter/routing/routes.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 GoRouter router(AuthRepository authRepository) => GoRouter(
   initialLocation: Routes.auth,
   debugLogDiagnostics: true,
+  redirect: _redirect,
   refreshListenable: authRepository,
   routes: [
     GoRoute(
@@ -52,3 +54,13 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
   ]
 );
 
+Future<String?> _redirect(BuildContext context, GoRouterState state) async {
+  final authRepository = context.read<AuthRepository>();
+  if (authRepository.authenticated) {
+    print('authed go home');
+    return Routes.home;
+  } else {
+    print('not authed go auth');
+    return Routes.auth;
+  }
+}
