@@ -41,6 +41,7 @@ class TransactionScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
+        backgroundColor: Theme.of(context).colorScheme.primaryFixedDim,
         child: const Icon(Icons.add)
       ),
     );
