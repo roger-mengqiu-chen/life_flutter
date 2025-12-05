@@ -7,7 +7,7 @@ class CategoryRepository {
 
   Future<List<Category>> get categories async {
     List<Map<String, dynamic>> res = await _db.query(
-      'SELECT * FROM category'
+      'SELECT * FROM category ORDER BY name'
     );
     return res.map((e) => Category(id: e['id'], name: e['name'])).toList();
   }
