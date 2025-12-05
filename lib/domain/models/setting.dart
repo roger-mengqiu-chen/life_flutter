@@ -2,12 +2,14 @@ class Setting {
   Setting({
     this.id,
     required this.name,
-    required this.value
+    required this.value,
+    required this.canToggle
   });
 
   int? id;
   late String name;
   late String value;
+  late bool canToggle;
 
   Map<String, dynamic> get entry {
     dynamic result;
@@ -18,6 +20,18 @@ class Setting {
       result = value;
     }
     return {name: result};
+  }
+
+  void setValue (dynamic newVal) {
+    if (newVal is bool && canToggle) {
+      value = newVal ? '1' : '0';
+    }
+    else if (newVal is String) {
+      value = newVal;
+    }
+    else {
+      throw ArgumentError('New value should be bool or String');
+    }
   }
 
   @override
