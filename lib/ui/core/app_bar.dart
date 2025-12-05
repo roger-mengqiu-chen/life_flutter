@@ -21,6 +21,7 @@ class DynamicAppBar extends StatelessWidget implements PreferredSizeWidget {
     final foregroundColor = colorScheme.onPrimary;
 
     return AppBar (
+      iconTheme: IconThemeData(color: foregroundColor),
       leading: showFilter ? IconButton(
         icon: Icon(Icons.filter_alt_outlined, color: foregroundColor),
         tooltip: 'Filter',
