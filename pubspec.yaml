@@ -39,5 +39,5 @@ flutter_launcher_icons:
   android: true
   ios: true
 
-  adaptive_icon_background: '#FFFFF'
+  adaptive_icon_background: '#FFFFFF'
   adaptive_icon_foreground: 'assets/icon/icon.png'
