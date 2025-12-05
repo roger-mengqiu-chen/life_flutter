@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:life_flutter/domain/models/setting.dart';
 import 'package:life_flutter/ui/core/app_bar.dart';
 import 'package:life_flutter/ui/setting/viewmodels/setting_viewmodel.dart';
+import 'package:life_flutter/ui/setting/widgets/setting_entry.dart';
 
 class SettingScreen extends StatefulWidget{
   const SettingScreen({super.key, required this.viewmodel});
@@ -38,9 +39,21 @@ class _SettingScreenState extends State<SettingScreen> {
               itemCount: settings.length,
               itemBuilder: (context, index) {
                 final setting = settings[index];
-                return ListTile(
-                  title: Text(setting.name)
-                );
+
+                void onSettingChanged(dynamic newValue) {
+                  setting.setValue(newValue);
+                  widget.viewmodel.update(setting);
+                }
+
+                if (setting.canToggle) {
+                  return SettingToggle(
+                    setting: setting,
+                    onSettingChanged: onSettingChanged
+                  );
+                }
+                else {
+                  return null;
+                }
               },
             );
           }
