@@ -16,7 +16,7 @@ class BiometricService {
     try {
       return await _auth.authenticate(
         localizedReason: 'Auth to access app',
-        persistAcrossBackgrounding: false,
+        persistAcrossBackgrounding: true,
       );
     } on PlatformException {
       return false;

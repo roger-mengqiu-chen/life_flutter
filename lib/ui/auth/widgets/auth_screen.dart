@@ -28,15 +28,15 @@ class _AuthScreenState extends State<AuthScreen> {
     bool authenticated = false;
 
     authenticated = await widget.viewmodel.biometricAuthenticate();
+    if (!mounted) return;
 
-    setState(() {
-      if (authenticated) {
-        _authStatus = 'Authentication Successful! Welcome!';
-        context.go(Routes.home);
-      } else if (!authenticated) {
+    if (authenticated) {
+      context.go(Routes.home);
+    } else {
+      setState(() {
         _authStatus = 'Authentication Failed/Cancelled.';
-      }
-    });
+      });
+    }
   }
 
   @override
@@ -52,7 +52,7 @@ class _AuthScreenState extends State<AuthScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: topSpace),
-            Center(child: const Logo()),
+            Center(child: Logo()),
             const SizedBox(height: 30),
             Text(
               _authStatus,
