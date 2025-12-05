@@ -3,12 +3,19 @@ import 'package:life_flutter/data/services/db.dart';
 import 'package:life_flutter/routing/router.dart';
 import 'package:life_flutter/config/dependencies.dart';
 import 'package:provider/provider.dart';
+import 'ui/auth/widgets/lifecycle_observer.dart';
 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DB.instance.database;
-  runApp(MultiProvider(providers: providers, child: const MainApp()));
+  runApp(MultiProvider(
+      providers: providers, 
+      child: const AppLifecycleObserver(
+        child: MainApp()
+      )
+    )
+  );
 }
 
 class MainApp extends StatelessWidget {
