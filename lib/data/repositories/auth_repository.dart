@@ -41,9 +41,12 @@ class AuthRepository extends ChangeNotifier{
     notifyListeners();
   }
 
-  void lock() {
-    authStatus = AuthStatus.unauthenticated;
-    notifyListeners();
+  Future<void> lock() async {
+    _log.info('Locking...');
+    if (await biometricsAuthEnabled) {
+      authStatus = AuthStatus.unauthenticated;
+      notifyListeners();
+    }
   }
 
   Future<bool> get biometricsAuthEnabled async {

@@ -37,11 +37,11 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver>
   }
 
   @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
     if (_authRepository.authStatus != AuthStatus.authenticating
         && (state == AppLifecycleState.inactive
             || state == AppLifecycleState.paused)) {
-      _authRepository.lock();
+      await _authRepository.lock();
       _log.info('User backgrounded/locked screen.');
     }
   }
