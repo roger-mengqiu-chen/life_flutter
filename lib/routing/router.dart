@@ -9,6 +9,7 @@ import 'package:life_flutter/ui/categories/widgets/category_screen.dart';
 import 'package:life_flutter/ui/home/widgets/home_screen.dart';
 import 'package:life_flutter/ui/setting/viewmodels/setting_viewmodel.dart';
 import 'package:life_flutter/ui/setting/widgets/setting_screen.dart';
+import 'package:life_flutter/utils/status.dart';
 import 'package:provider/provider.dart';
 
 GoRouter router(AuthRepository authRepository) => GoRouter(
@@ -56,11 +57,22 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
 
 Future<String?> _redirect(BuildContext context, GoRouterState state) async {
   final authRepository = context.read<AuthRepository>();
-  if (authRepository.authenticated) {
-    print('authed go home');
+  final status = authRepository.authStatus;
+
+  final isAuthRoute = state.matchedLocation == Routes.auth;
+  final authenticated = authRepository.authenticated;
+
+  if (status == AuthStatus.unknown) {
+    return null;
+  }
+
+  if (authenticated && isAuthRoute) {
     return Routes.home;
-  } else {
-    print('not authed go auth');
+  }
+
+  if (!authenticated && !isAuthRoute) {
     return Routes.auth;
   }
+
+  return null;
 }

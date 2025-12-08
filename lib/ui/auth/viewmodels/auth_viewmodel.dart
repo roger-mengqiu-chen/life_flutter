@@ -1,4 +1,5 @@
 import 'package:life_flutter/data/repositories/auth_repository.dart';
+import 'package:life_flutter/utils/status.dart';
 
 class AuthViewmodel {
   AuthViewmodel({required AuthRepository authRepository})
@@ -6,11 +7,15 @@ class AuthViewmodel {
 
   final AuthRepository _authRepository;
 
-  Future<bool> biometricAuthenticate() async {
-    bool biometricsEnabled = await _authRepository.biometricsAuthEnabled;
-    if (!biometricsEnabled) return true;
+  Future<void> biometricAuthenticate() async {
+    await _authRepository.biometricsAuthenticate();
+  }
 
-    bool res = await _authRepository.biometricsAuthenticate();
-    return res;
+  bool get authenticated  {
+    return _authRepository.authenticated;
+  }
+
+  set authStatus(AuthStatus status) {
+    _authRepository.authStatus = status;
   }
 }

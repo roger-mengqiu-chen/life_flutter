@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:life_flutter/data/repositories/auth_repository.dart';
 import 'package:life_flutter/routing/routes.dart';
 import 'package:life_flutter/ui/auth/viewmodels/auth_viewmodel.dart';
 import 'package:life_flutter/ui/core/icon.dart';
+import 'package:life_flutter/utils/status.dart';
 import 'package:local_auth/local_auth.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -26,8 +28,8 @@ class _AuthScreenState extends State<AuthScreen> {
 
   Future<void> _authenticate() async {
     bool authenticated = false;
-
-    authenticated = await widget.viewmodel.biometricAuthenticate();
+    await widget.viewmodel.biometricAuthenticate();
+    authenticated = widget.viewmodel.authenticated;
     if (!mounted) return;
 
     if (authenticated) {

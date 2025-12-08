@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:life_flutter/data/repositories/auth_repository.dart';
-import 'package:life_flutter/routing/routes.dart';
+import 'package:life_flutter/utils/status.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 
@@ -39,9 +38,11 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver>
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.inactive || state == AppLifecycleState.paused) {
-      _authRepository.authenticated = false;
-      _log.info('User backgrounded/locked screen. Authenticated set to false.');
+    if (_authRepository.authStatus != AuthStatus.authenticating
+        && (state == AppLifecycleState.inactive
+            || state == AppLifecycleState.paused)) {
+      _authRepository.lock();
+      _log.info('User backgrounded/locked screen.');
     }
   }
 
