@@ -17,9 +17,17 @@ class AuthRepository extends ChangeNotifier{
   final BiometricService _biometricService;
   final _log = Logger('AuthRepository');
 
+  bool appBackGrounded = false;
+  DateTime lastActivity = DateTime.now();
   AuthStatus authStatus = AuthStatus.unknown;
 
   bool get authenticated => authStatus == AuthStatus.authenticated;
+
+  bool get expired {
+    _log.info('Checking expiration...');
+    return !appBackGrounded
+        && DateTime.now().difference(lastActivity).inSeconds > 5;
+  }
 
   Future<void> biometricsAuthenticate() async {
     authStatus = AuthStatus.authenticating;
@@ -30,7 +38,17 @@ class AuthRepository extends ChangeNotifier{
       return;
     }
 
-    bool succeed = await _biometricService.authenticate();
+    _log.info('Authenticating...');
+    bool succeed = false;
+    try {
+      succeed = await _biometricService.authenticate();
+      lastActivity = DateTime.now();
+      _log.info('Biometric auth succeeded and timer is reset');
+    } catch (e) {
+      _log.severe('Biometric auth failed: $e');
+      succeed = false;
+    }
+
     if (succeed) {
       authStatus = AuthStatus.authenticated;
       _log.info('Passed biometric auth');
@@ -41,12 +59,10 @@ class AuthRepository extends ChangeNotifier{
     notifyListeners();
   }
 
-  Future<void> lock() async {
-    _log.info('Locking...');
-    if (await biometricsAuthEnabled) {
-      authStatus = AuthStatus.unauthenticated;
-      notifyListeners();
-    }
+  void unlock() {
+    _log.info('Unlocking...');
+    appBackGrounded = false;
+    notifyListeners();
   }
 
   Future<bool> get biometricsAuthEnabled async {

@@ -37,12 +37,19 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver>
   }
 
   @override
-  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
-    if (_authRepository.authStatus != AuthStatus.authenticating
-        && (state == AppLifecycleState.inactive
-            || state == AppLifecycleState.paused)) {
-      await _authRepository.lock();
-      _log.info('User backgrounded/locked screen.');
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      if (_authRepository.authStatus != AuthStatus.authenticating) {
+        _authRepository.lastActivity = DateTime.now();
+        _authRepository.appBackGrounded = true;
+        //@TODO: auth repository can remember the last/target location here.
+        _log.info('User backgrounded/locked screen.');
+      }
+    }
+    else if (state == AppLifecycleState.resumed
+        && _authRepository.appBackGrounded) {
+      _log.info('App resumed.');
+      _authRepository.unlock();
     }
   }
 
