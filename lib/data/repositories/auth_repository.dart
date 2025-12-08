@@ -21,12 +21,19 @@ class AuthRepository extends ChangeNotifier{
   DateTime lastActivity = DateTime.now();
   AuthStatus authStatus = AuthStatus.unknown;
 
-  bool get authenticated => authStatus == AuthStatus.authenticated;
-
-  bool get expired {
-    _log.info('Checking expiration...');
-    return appBackGrounded
-        && DateTime.now().difference(lastActivity).inSeconds > 5;
+  Future<bool> get authenticated async {
+    if (!await _biometricService.hasBiometrics()) {
+      print('Biometrics not available. Skipped');
+      return true;
+    } else {
+      if (authStatus != AuthStatus.authenticated) {
+        return false;
+      } else if (appBackGrounded && DateTime.now().difference(lastActivity).inSeconds > 5) {
+        return false;
+      } else {
+        return true;
+      }
+    }
   }
 
   Future<void> biometricsAuthenticate() async {

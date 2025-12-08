@@ -11,8 +11,8 @@ class AuthViewmodel {
     await _authRepository.biometricsAuthenticate();
   }
 
-  bool get authenticated  {
-    return _authRepository.authenticated;
+  Future<bool> get authenticated async {
+    return await _authRepository.authenticated;
   }
 
   set authStatus(AuthStatus status) {

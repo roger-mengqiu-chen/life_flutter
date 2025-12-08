@@ -27,7 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
   Future<void> _authenticate() async {
     bool authenticated = false;
     await widget.viewmodel.biometricAuthenticate();
-    authenticated = widget.viewmodel.authenticated;
+    authenticated = await widget.viewmodel.authenticated;
     if (!mounted) return;
 
     if (authenticated) {

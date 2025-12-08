@@ -63,21 +63,12 @@ Future<String?> _redirect(BuildContext context, GoRouterState state) async {
   final status = authRepository.authStatus;
 
   final isAuthRoute = state.matchedLocation == Routes.auth;
-  final expired = authRepository.expired;
-  final authenticated = authRepository.authenticated;
+  final authenticated = await authRepository.authenticated;
+  print('authenticated: $authenticated');
+  print('isAuthRoute: $isAuthRoute');
 
   if (status == AuthStatus.unknown) {
     _log.info('Unknown status');
-    return null;
-  }
-
-  if (!expired && authenticated) {
-    _log.info('Backgrounded and authenticated');
-    return null;
-  }
-
-  if (expired && isAuthRoute) {
-    _log.info('Expired and trying to access auth route');
     return null;
   }
 
@@ -86,7 +77,7 @@ Future<String?> _redirect(BuildContext context, GoRouterState state) async {
     return Routes.home;
   }
 
-  if ((!authenticated || expired) && !isAuthRoute ) {
+  if (!authenticated && !isAuthRoute ) {
     _log.info('Not authenticated and trying to access non-auth route');
     return Routes.auth;
   }
