@@ -11,6 +11,9 @@ import 'package:life_flutter/ui/setting/viewmodels/setting_viewmodel.dart';
 import 'package:life_flutter/ui/setting/widgets/setting_screen.dart';
 import 'package:life_flutter/utils/status.dart';
 import 'package:provider/provider.dart';
+import 'package:logging/logging.dart';
+
+final Logger _log = Logger('router');
 
 GoRouter router(AuthRepository authRepository) => GoRouter(
   initialLocation: Routes.auth,
@@ -63,14 +66,17 @@ Future<String?> _redirect(BuildContext context, GoRouterState state) async {
   final authenticated = authRepository.authenticated;
 
   if (status == AuthStatus.unknown) {
+    _log.info('Unknown status');
     return null;
   }
 
   if (authenticated && isAuthRoute) {
+    _log.info('Authenticated and trying to access auth route');
     return Routes.home;
   }
 
   if (!authenticated && !isAuthRoute) {
+    _log.info('Not authenticated and trying to access non-auth route');
     return Routes.auth;
   }
 
