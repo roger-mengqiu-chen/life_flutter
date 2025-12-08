@@ -25,7 +25,7 @@ class AuthRepository extends ChangeNotifier{
 
   bool get expired {
     _log.info('Checking expiration...');
-    return !appBackGrounded
+    return appBackGrounded
         && DateTime.now().difference(lastActivity).inSeconds > 5;
   }
 
@@ -43,6 +43,7 @@ class AuthRepository extends ChangeNotifier{
     try {
       succeed = await _biometricService.authenticate();
       lastActivity = DateTime.now();
+      appBackGrounded = false;
       _log.info('Biometric auth succeeded and timer is reset');
     } catch (e) {
       _log.severe('Biometric auth failed: $e');
@@ -61,7 +62,6 @@ class AuthRepository extends ChangeNotifier{
 
   void unlock() {
     _log.info('Unlocking...');
-    appBackGrounded = false;
     notifyListeners();
   }
 
