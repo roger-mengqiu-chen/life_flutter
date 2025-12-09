@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:life_flutter/ui/investments/widget/investment_screen.dart';
 import 'package:life_flutter/ui/more/widgets/more_screen.dart';
+import 'package:life_flutter/ui/transactions/viewmodels/transaction_viewmodel.dart';
 import 'package:life_flutter/ui/transactions/widgets/transaction_screen.dart';
 import 'package:life_flutter/ui/utilities/widgets/utilities_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _getPage(int index) {
     switch (index) {
       case 0:
-        return const TransactionScreen();
+        return TransactionScreen(viewmodel: TransactionViewmodel(transactionRepository: context.read()));
       case 1:
         return const InvestmentScreen();
       case 2:
@@ -25,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 3:
         return const MoreScreen();
       default:
-        return const TransactionScreen();
+        return TransactionScreen(viewmodel: TransactionViewmodel(transactionRepository: context.read()));
     }
   }
 
