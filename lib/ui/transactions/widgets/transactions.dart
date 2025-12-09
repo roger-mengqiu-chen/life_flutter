@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:life_flutter/domain/models/transaction.dart';
+import 'package:life_flutter/utils/extensions.dart';
 
 class TransactionBrief extends StatelessWidget {
   const TransactionBrief({
@@ -37,6 +38,7 @@ class TransactionBrief extends StatelessWidget {
                     transaction.merchant.toString(),
                     style: const TextStyle(
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -59,9 +61,9 @@ class TransactionBrief extends StatelessWidget {
                         )
                       ),
                       Text(
-                        transaction.category.toString(),
+                        transaction.category.toString().toCapitalized(),
                         style: TextStyle(
-                          color: Colors.grey[600],
+                          color: Colors.black,
                           fontSize: 12,
                         )
                       )

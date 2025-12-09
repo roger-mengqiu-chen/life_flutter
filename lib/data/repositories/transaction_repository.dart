@@ -1,10 +1,12 @@
 import 'package:life_flutter/data/services/db.dart';
 import 'package:life_flutter/domain/models/transaction.dart';
+import 'package:logging/logging.dart';
 
 class TransactionRepository {
   TransactionRepository({required DB db}) : _db = db;
 
   final DB _db;
+  final _log = Logger('TransactionRepository');
 
   Future<List<Transaction>> get transactions async {
     List<Map<String, dynamic>> res = await _db.query(
@@ -25,6 +27,7 @@ class TransactionRepository {
       'LEFT JOIN category c ON t.categoryId = c.id '
       'ORDER BY transactionTime DESC'
     );
+    _log.fine('Got transactions: $res');
 
     return res.map((e) => Transaction.fromJson({
         'id': e['id'],
