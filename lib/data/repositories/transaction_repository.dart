@@ -25,7 +25,6 @@ class TransactionRepository {
       'LEFT JOIN category c ON t.categoryId = c.id '
       'ORDER BY transactionTime DESC'
     );
-    print('transactions: $res');
 
     return res.map((e) => Transaction.fromJson({
         'id': e['id'],
