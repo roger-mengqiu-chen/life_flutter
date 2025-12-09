@@ -22,17 +22,13 @@ class AuthRepository extends ChangeNotifier{
   AuthStatus authStatus = AuthStatus.unknown;
 
   Future<bool> get authenticated async {
-    if (!await _biometricService.hasBiometrics()) {
-      print('Biometrics not available. Skipped');
-      return true;
+    if (authStatus != AuthStatus.authenticated) {
+      return false;
+    } else if (appBackGrounded && DateTime.now().difference(lastActivity).inSeconds > 5) {
+      // if app is backgrounded and expired, check if biometrics is enabled
+      return !await biometricsAuthEnabled;
     } else {
-      if (authStatus != AuthStatus.authenticated) {
-        return false;
-      } else if (appBackGrounded && DateTime.now().difference(lastActivity).inSeconds > 5) {
-        return false;
-      } else {
-        return true;
-      }
+      return true;
     }
   }
 
