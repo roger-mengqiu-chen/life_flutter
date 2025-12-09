@@ -64,8 +64,6 @@ Future<String?> _redirect(BuildContext context, GoRouterState state) async {
 
   final isAuthRoute = state.matchedLocation == Routes.auth;
   final authenticated = await authRepository.authenticated;
-  print('authenticated: $authenticated');
-  print('isAuthRoute: $isAuthRoute');
 
   if (status == AuthStatus.unknown) {
     _log.info('Unknown status');
