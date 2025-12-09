@@ -12,21 +12,39 @@ class TransactionRepository {
         't.id, '
         't.transactionTime, '
         't.amount, '
-        'm.name AS merchant, '
+        'm.id AS merchantId, '
+        'm.name AS merchantName, '
+        'l.id AS locationId, '
+        'l.name AS locationName, '
         't.transactionType, '
-        'c.name AS category '
+        'c.id AS categoryId, '
+        'c.name AS categoryName '
         'FROM life_transaction t '
-      'INNER JOIN merchant m ON t.merchantId = m.id '
-      'INNER JOIN category c ON t.categoryId = c.id '
+      'LEFT JOIN merchant m ON t.merchantId = m.id '
+      'LEFT JOIN location l ON m.locationId = l.id '
+      'LEFT JOIN category c ON t.categoryId = c.id '
       'ORDER BY transactionTime DESC'
     );
-    return res.map((e) => Transaction(
-      id: e['id'],
-      transactionTime: e['transactionTime'],
-      amount: e['amount'],
-      merchant: e['merchant'],
-      transactionType: e['transactionType'],
-      category: e['category']
+    print('transactions: $res');
+
+    return res.map((e) => Transaction.fromJson({
+        'id': e['id'],
+        'transactionTime': e['transactionTime'],
+        'amount': e['amount'],
+        'merchant': {
+          'id': e['merchantId'],
+          'name': e['merchantName'],
+        },
+        'location': {
+          'id': e['locationId'],
+          'name': e['locationName'],
+        },
+        'transactionType': e['transactionType'],
+        'category': {
+          'id': e['categoryId'],
+          'name': e['categoryName'],
+        }
+      }
     )).toList();
   }
 }

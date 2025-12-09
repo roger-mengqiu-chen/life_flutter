@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:life_flutter/domain/models/transaction.dart';
 import 'package:life_flutter/ui/core/app_bar.dart';
 import 'package:life_flutter/ui/core/drawer.dart';
+import 'package:life_flutter/ui/transactions/viewmodels/transaction_viewmodel.dart';
+import 'package:life_flutter/ui/transactions/widgets/transactions.dart';
 
 class TransactionScreen extends StatelessWidget {
-  const TransactionScreen({super.key});
+  const TransactionScreen({
+    super.key,
+    required this.viewmodel
+  });
+
+  final TransactionViewmodel viewmodel;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +46,20 @@ class TransactionScreen extends StatelessWidget {
               title: Text('Bulk Edit')
           )
         ]
+      ),
+      body: FutureBuilder(
+        future: viewmodel.transactions,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text(snapshot.error.toString()));
+          }
+
+          final transactions = snapshot.data as List<Transaction>;
+          return Transactions(transactions: transactions);
+        }
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
