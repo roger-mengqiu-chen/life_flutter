@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:life_flutter/domain/models/category.dart';
 import 'package:life_flutter/ui/categories/viewmodels/category_viewmodel.dart';
 import 'package:life_flutter/ui/core/app_bar.dart';
+import 'package:life_flutter/utils/extensions.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({
@@ -36,7 +37,7 @@ class CategoryScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 final category = categories[index];
                 return ListTile(
-                  title: Text(category.name)
+                  title: Text(category.name.toCapitalized())
                 );
               }
             );
