@@ -24,7 +24,7 @@ class AuthRepository extends ChangeNotifier{
   Future<bool> get authenticated async {
     if (authStatus != AuthStatus.authenticated) {
       return false;
-    } else if (appBackGrounded && DateTime.now().difference(lastActivity).inSeconds > 5) {
+    } else if (appBackGrounded && DateTime.now().difference(lastActivity).inSeconds > 10) {
       // if app is backgrounded and expired, check if biometrics is enabled
       return !await biometricsAuthEnabled;
     } else {
