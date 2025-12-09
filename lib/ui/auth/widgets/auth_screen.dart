@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:life_flutter/routing/routes.dart';
 import 'package:life_flutter/ui/auth/viewmodels/auth_viewmodel.dart';
 import 'package:life_flutter/ui/core/icon.dart';
-import 'package:local_auth/local_auth.dart';
+import 'package:logging/logging.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key, required this.viewmodel});
@@ -15,8 +15,8 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  final LocalAuthentication auth = LocalAuthentication();
   String _authStatus = '';
+  final _log = Logger('AuthScreen');
 
   @override
   void initState() {
@@ -25,6 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   Future<void> _authenticate() async {
+    _log.info('Authenticating...');
     bool authenticated = false;
     await widget.viewmodel.biometricAuthenticate();
     authenticated = await widget.viewmodel.authenticated;
