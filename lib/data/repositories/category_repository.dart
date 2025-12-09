@@ -9,6 +9,6 @@ class CategoryRepository {
     List<Map<String, dynamic>> res = await _db.query(
       'SELECT * FROM category ORDER BY name'
     );
-    return res.map((e) => Category(id: e['id'], name: e['name'])).toList();
+    return res.map((e) => Category.fromJson(e)).toList();
   }
 }
